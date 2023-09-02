@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import decode from 'jwt-decode';
-import * as moment from 'moment';
-import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BlogModel } from '../shared/models/blog.model';
 
 @Injectable()
 export class BlogsService {
-  constructor(private authService: AuthService, private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getAllBlogs({
     limit = 10,

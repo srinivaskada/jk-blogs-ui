@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { BreadcrumbModule } from "xng-breadcrumb";
 import { PublicLayout } from './layouts/public-layout/public-layout.comopnent';
 import { MainLayout } from './layouts/main-layout/main-layout.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MainLayout } from './layouts/main-layout/main-layout.component';
       provide: HTTP_INTERCEPTORS,
       useClass: BearerTokenInterceptor,
       multi: true
-    }
+    },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
