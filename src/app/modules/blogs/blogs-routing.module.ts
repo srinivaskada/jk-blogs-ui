@@ -7,6 +7,9 @@ import { MainLayout } from 'src/app/layouts/main-layout/main-layout.component';
 const routes: Routes = [{
   path: '',
   component: MainLayout,
+  data: {
+    breadcrumb: 'Blogs'
+  },
   children: [
     {
       path: '',
@@ -15,7 +18,12 @@ const routes: Routes = [{
     },
     {
       path: ':id',
-      component: BlogDetails
+      component: BlogDetails,
+      data: {
+        breadcrumb: (id: any) => {
+          return `Blog ${id}`
+         }
+      },
     }
   ]
 }];

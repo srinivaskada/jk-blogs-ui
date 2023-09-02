@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { BreadcrumbModule } from "xng-breadcrumb";
 import { PublicLayout } from './layouts/public-layout/public-layout.comopnent';
 import { MainLayout } from './layouts/main-layout/main-layout.component';
 
@@ -31,6 +32,7 @@ import { MainLayout } from './layouts/main-layout/main-layout.component';
     HttpClientModule,
     StoreModule.forRoot({}, {}),
     FormsModule,
+    BreadcrumbModule,
     ...[
       MatIconModule,
       MatButtonModule,
