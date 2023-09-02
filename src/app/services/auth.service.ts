@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import decode from 'jwt-decode';
 import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { UserModel } from '../shared/models/user.model';
 
 @Injectable()
 export class AuthService {
-  constructor(private cookieService: CookieService, private httpClient: HttpClient) {}
+  private authorizedUser: Partial<UserModel> | null = null
+  constructor(private httpClient: HttpClient) {}
 
   public captureToken() {
     return this.httpClient.get<{
@@ -24,19 +25,28 @@ export class AuthService {
     return localStorage.getItem('user-token');
   }
 
-  public isAuthenticated(): boolean {
+  public isAuthorizedUser(): boolean {
     const token = this.getToken();
     if(token) {
       const tokenResult: any = decode(token)
-      return tokenResult.exp < moment().unix()
+      this.authorizedUser = {
+        ...tokenResult,
+        iat: undefined,
+        exp: undefined
+      }
+      return tokenResult.exp > moment().unix()
     }
     return false;
+  }
+
+  public getAuthorizedUser() {
+    return this.authorizedUser
   }
 
   public isFeatureAuthenticated(feature: string) {
     // For authenticating specific features
     // TO implement feature specific authorization
     console.log('feature', feature)
-    return this.isAuthenticated()
+    return this.isAuthorizedUser()
   }
 }
