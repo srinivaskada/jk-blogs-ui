@@ -15,8 +15,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { BreadcrumbModule } from "xng-breadcrumb";
 import { PublicLayout } from './layouts/public-layout/public-layout.comopnent';
 import { MainLayout } from './layouts/main-layout/main-layout.component';
+import { AuthService } from './services/auth.service';
+import { RootStoreModule } from './root-store';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { MainLayout } from './layouts/main-layout/main-layout.component';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot({}, {}),
+    RootStoreModule,
     FormsModule,
+    BreadcrumbModule,
     ...[
       MatIconModule,
       MatButtonModule,
@@ -45,7 +50,8 @@ import { MainLayout } from './layouts/main-layout/main-layout.component';
       provide: HTTP_INTERCEPTORS,
       useClass: BearerTokenInterceptor,
       multi: true
-    }
+    },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

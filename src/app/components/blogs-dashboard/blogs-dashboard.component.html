@@ -1,4 +1,19 @@
 <div>
-  <div>I am blog dashboard</div>
-  <div>{{title}}</div>
+  <h2>Dashboard</h2>
+  <div *ngIf="!(isLoading$ | async)">
+    <div *ngFor="let blog of blogItems$ | async" class="is-flex is-flex-direction-column fg-4">
+      <mat-card class="blog-dashboard-card-shadow">
+        <mat-card-content>
+          <a [routerLink]="[ blog.id]" class="blog-title">{{blog.title}}</a>
+          <p class="blog-description">{{blog.description}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <mat-paginator [length]="totalBlogItems$ | async"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="handleBlogsPaginationEvent($event)"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
 </div>

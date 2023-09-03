@@ -6,13 +6,18 @@ import { catchError, map, of, switchMap } from "rxjs";
 
 @Injectable()
 export class BlogsStoreEffects {
-  constructor(private blogsService: BlogsService, private actions$: Actions) {}
+  constructor(private blogsService: BlogsService, private actions$: Actions) {
+    this.actions$.subscribe(d => {
+      console.log('subscribed')
+      console.log(d)
+    })
+  }
 
-  loadRequestEffect$ = this.actions$.pipe(
+  blogsEffect$ = createEffect(() => this.actions$.pipe(
     ofType<blogActions.LoadRequestAction>(
       blogActions.ActionTypes.LOAD_REQUEST
     ),
-    switchMap(action => 
+    switchMap(action =>
       this.blogsService
         .getAllBlogs({
           limit: action.payload.limit,
@@ -22,7 +27,8 @@ export class BlogsStoreEffects {
           map(blogsPaginationResponse => new blogActions.LoadSuccessAction({
             limit: blogsPaginationResponse.limit,
             page: blogsPaginationResponse.page,
-            items: blogsPaginationResponse.data
+            items: blogsPaginationResponse.data,
+            total: blogsPaginationResponse.total
           })),
           catchError(error =>
             of(new blogActions.LoadFailAction({
@@ -30,6 +36,7 @@ export class BlogsStoreEffects {
             }))
           )
         )
-      )
+    )
+  )
   )
 }

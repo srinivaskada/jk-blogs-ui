@@ -2,7 +2,8 @@ import { CommonRequestState } from "src/app/types";
 import { ActionTypes, Actions } from "./actions";
 import { State, blogsAdapter, initialState } from "./state";
 
-export function featureReducer(state = initialState, action: Actions): State {
+export function blogsReducer(state = initialState, action: Actions): State {
+  console.log(state, action)
   switch(action.type) {
     case ActionTypes.LOAD_REQUEST:
       return {
@@ -13,11 +14,12 @@ export function featureReducer(state = initialState, action: Actions): State {
         error: ''
       }
     case ActionTypes.LOAD_SUCCESS:
-      return blogsAdapter.addMany(action.payload.items, {
+      return blogsAdapter.setMany(action.payload.items, {
         ...state,
         requestState: CommonRequestState.SUCCESS,
         limit: action.payload.limit,
-        page: action.payload.limit
+        page: action.payload.limit,
+        total: action.payload.total
       })
     case ActionTypes.LOAD_FAIL:
       return {

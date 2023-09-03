@@ -11,6 +11,10 @@
  </mat-toolbar>
 </div>
 <div class="is-flex-grow-1">
+  <xng-breadcrumb [separator]="iconTemplate"></xng-breadcrumb>
+  <ng-template #iconTemplate>
+    <mat-icon>chevron_right</mat-icon>
+  </ng-template>
   <router-outlet></router-outlet>
 </div>
 <div>
