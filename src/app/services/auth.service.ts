@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../shared/models/user.model';
+import { of } from 'rxjs';
 
 @Injectable()
 export class AuthService {

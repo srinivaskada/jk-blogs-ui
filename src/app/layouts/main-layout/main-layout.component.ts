@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AuthStoreActions, RootStoreState } from 'src/app/root-store';
 
 @Component({
   selector: 'main-layout',
@@ -10,4 +12,10 @@ import { Component } from '@angular/core';
 })
 export class MainLayout {
   title = 'jk-blog-ui';
+  constructor(private store$: Store<RootStoreState.State>) {}
+
+  logout() {
+    alert('Logout')
+    this.store$.dispatch(new AuthStoreActions.LogoutAction())
+  }
 }

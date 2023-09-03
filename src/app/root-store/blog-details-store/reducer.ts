@@ -3,7 +3,6 @@ import { ActionTypes, Actions } from "./actions";
 import { State, initialState } from "./state";
 
 export function blogsReducer(state = initialState, action: Actions): State {
-  console.log(state, action)
   switch(action.type) {
     case ActionTypes.LOAD_REQUEST:
       return {

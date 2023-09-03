@@ -14,7 +14,7 @@ export function blogsReducer(state = initialState, action: Actions): State {
         error: ''
       }
     case ActionTypes.LOAD_SUCCESS:
-      return blogsAdapter.setMany(action.payload.items, {
+      return blogsAdapter.setAll(action.payload.items, {
         ...state,
         requestState: CommonRequestState.SUCCESS,
         limit: action.payload.limit,
