@@ -7,9 +7,15 @@ export const getError = (state: State): any => state.error
 
 export const getIsLoading = (state: State) => state.requestState === CommonRequestState.LOADING
 
-export const selectBlogsFeatureState: MemoizedSelector<object, State> = createFeatureSelector<State>('blogs-feature')
+export const getTotalBlogItems = (state: State) => {
+  return state.total || 0
+}
+
+export const selectBlogsFeatureState: MemoizedSelector<object, State> = createFeatureSelector<State>('blogs')
 
 export const selectAllBlogsItems = blogsAdapter.getSelectors(selectBlogsFeatureState).selectAll
+
+export const selectTotalBlogItems = createSelector(selectBlogsFeatureState, getTotalBlogItems)
 
 export const selectBlogById = (id: BlogModel['id']) =>
   createSelector(selectAllBlogsItems, (blogs => blogs?.find(blog => id === blog.id)))

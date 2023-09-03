@@ -1,4 +1,14 @@
 <div>
-  <div>I am blog details</div>
-  <div>ID {{id}}</div>
+  {{blogDetailsItem$ | async}}
+  <mat-card class="example-card" *ngIf="blogDetailsItem$ | async as blog">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{blog.title}}</mat-card-title>
+        <mat-card-subtitle>{{blog.description}}</mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      {{blog.description}}
+    </mat-card-content>
+  </mat-card>
 </div>

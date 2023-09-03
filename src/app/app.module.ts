@@ -19,6 +19,7 @@ import { BreadcrumbModule } from "xng-breadcrumb";
 import { PublicLayout } from './layouts/public-layout/public-layout.comopnent';
 import { MainLayout } from './layouts/main-layout/main-layout.component';
 import { AuthService } from './services/auth.service';
+import { RootStoreModule } from './root-store';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthService } from './services/auth.service';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot({}, {}),
+    RootStoreModule,
     FormsModule,
     BreadcrumbModule,
     ...[

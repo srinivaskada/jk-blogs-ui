@@ -14,6 +14,7 @@ export class BlogsService {
     return this.httpClient.get<{
       limit: number,
       page: number,
+      total: number
       data: BlogModel[]
     }>(`${environment.apiV1BaseUrl}/blogs`, {
       params: {

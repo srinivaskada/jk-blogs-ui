@@ -10,6 +10,7 @@ export const blogsAdapter: EntityAdapter<BlogModel> = createEntityAdapter<BlogMo
 
 export interface State extends EntityState<BlogModel> {
   requestState?: CommonRequestState
+  total?: number
   limit?: number
   page?: number
   error?: string

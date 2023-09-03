@@ -7,22 +7,14 @@ import { UserModel } from '../shared/models/user.model';
 
 @Injectable()
 export class AuthService {
+  readonly USER_TOKEN_KEY = 'user-token'
   private authorizedUser: Partial<UserModel> | null = null
-  constructor(private httpClient: HttpClient) {}
-
-  public captureToken() {
-    return this.httpClient.get<{
-      data: {
-        token: string
-      }
-    }>(`${environment.apiV1BaseUrl}/auth/capture-token`)
-  }
 
   public setToken(token: string) {
-    localStorage.setItem('user-token', token)
+    localStorage.setItem(this.USER_TOKEN_KEY, token)
   }
   public getToken(): string | null {
-    return localStorage.getItem('user-token');
+    return localStorage.getItem(this.USER_TOKEN_KEY);
   }
 
   public isAuthorizedUser(): boolean {
@@ -48,5 +40,9 @@ export class AuthService {
     // TO implement feature specific authorization
     console.log('feature', feature)
     return this.isAuthorizedUser()
+  }
+
+  public logout() {
+    localStorage.removeItem(this.USER_TOKEN_KEY)
   }
 }
