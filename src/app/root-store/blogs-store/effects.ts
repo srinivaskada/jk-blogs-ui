@@ -6,12 +6,7 @@ import { catchError, map, of, switchMap } from "rxjs";
 
 @Injectable()
 export class BlogsStoreEffects {
-  constructor(private blogsService: BlogsService, private actions$: Actions) {
-    this.actions$.subscribe(d => {
-      console.log('subscribed')
-      console.log(d)
-    })
-  }
+  constructor(private blogsService: BlogsService, private actions$: Actions) { }
 
   blogsEffect$ = createEffect(() => this.actions$.pipe(
     ofType<blogActions.LoadRequestAction>(

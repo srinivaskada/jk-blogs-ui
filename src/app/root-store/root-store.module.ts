@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BlogsStoreModule } from './blogs-store';
-import { BlogsService } from '../services/blogs.service';
 import { BlogDetailsStoreModule } from './blog-details-store';
+
+import { BlogsService } from '../services/blogs.service';
+import { AuthStoreModule } from './auth-store/auth-store.module';
 
 
 
@@ -14,6 +16,7 @@ import { BlogDetailsStoreModule } from './blog-details-store';
     CommonModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    AuthStoreModule,
     BlogsStoreModule,
     BlogDetailsStoreModule,
   ],
